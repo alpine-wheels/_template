@@ -1,0 +1,35 @@
+name: Build Python wheel for Alpine Linux
+
+on:
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - published
+
+jobs:
+
+  build:
+    name: Build Python wheel for Alpine Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+      - name: Run build script in Alpine container
+        run: docker-compose up build
+      - name: Get file name of asset
+        id: asset
+        run: echo "::set-output name=filename::$(ls *.whl)"
+      - name: Show sha256 of asset
+        run: shasum -a 256 ${{ github.workspace }}/${{ steps.asset.outputs.filename }}
+      - name: Upload asset to release
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          asset_content_type: application/octet-stream
+          asset_path: ${{ github.workspace }}/${{ steps.asset.outputs.filename }}
+          asset_name: ${{ steps.asset.outputs.filename }}
+          upload_url: ${{ github.event.release.upload_url }}

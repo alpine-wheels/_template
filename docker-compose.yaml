@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  build:
+    image: python:3.8.3-alpine3.12
+    working_dir: /workspace
+    entrypoint:
+      - /bin/sh
+      - build.sh
+    volumes:
+     - '${GITHUB_WORKSPACE}:/workspace'
