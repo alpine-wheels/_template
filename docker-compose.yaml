@@ -8,4 +8,4 @@ services:
       - /bin/sh
       - build.sh
     volumes:
-     - '${GITHUB_WORKSPACE}:/workspace'
+     - ./:/workspace
