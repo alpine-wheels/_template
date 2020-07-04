@@ -17,7 +17,7 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v2
       - name: Run build script in Alpine container
-        run: docker-compose up build
+        run: docker-compose run -T build
       - name: Get file name and sha256 of asset
         id: asset
         run: |
