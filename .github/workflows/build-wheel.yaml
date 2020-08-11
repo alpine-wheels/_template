@@ -1,11 +1,15 @@
-# template version 2020.1
+# template version 2020.2
 
 name: Build Python wheel for Alpine Linux
 
 on:
-  push:
+  pull_request:
     branches:
       - master
+    types:
+      - opened
+      - synchronize
+      - reopened
   release:
     types:
       - published
