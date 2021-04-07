@@ -1,10 +1,10 @@
-# template version 2021.2
+# template version 2021.3
 
 version: '3.8'
 
 services:
   build:
-    image: python:3.9.3-alpine3.13
+    image: python:3.9.4-alpine3.13
     working_dir: /workspace
     entrypoint:
       - /bin/sh
