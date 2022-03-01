@@ -1,4 +1,4 @@
-# template version 2021.3
+# template version 2022.1
 
 name: Build Python wheel for Alpine Linux
 
@@ -18,7 +18,7 @@ jobs:
     steps:
 
       - name: Check out the repository
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Run build script in Alpine container
         run: docker-compose run -T build
