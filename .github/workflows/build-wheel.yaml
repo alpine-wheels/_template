@@ -1,4 +1,4 @@
-# template version 2022.2
+# template version 2022.3
 
 name: Build Python wheel for Alpine Linux
 
@@ -15,13 +15,21 @@ jobs:
   build:
     name: Build Python wheel for Alpine Linux
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image_tag:
+          - 3.9.12-alpine3.15
+          - 3.10.4-alpine3.15
+
     steps:
 
       - name: Check out the repository
         uses: actions/checkout@v3
 
       - name: Run build script in Alpine container
-        run: docker-compose run -T build
+        run: docker compose run --no-TTY build
+        env:
+          IMAGE_TAG: ${{ image_tag }}
 
       - name: Get file name and sha256 of asset
         id: asset

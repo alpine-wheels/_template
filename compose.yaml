@@ -1,11 +1,11 @@
-# template version 2022.3
+# template version 2022.4
 
 services:
   build:
-    image: python:3.10.4-alpine3.15
-    working_dir: /workspace
     entrypoint:
       - /bin/sh
       - build.sh
+    image: python:${IMAGE_TAG}
     volumes:
       - ./:/workspace
+    working_dir: /workspace
