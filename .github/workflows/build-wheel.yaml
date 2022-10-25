@@ -18,8 +18,7 @@ jobs:
     strategy:
       matrix:
         image_tag:
-#           - 3.9-alpine
-          - 3.10-alpine
+          - 3.11-alpine
 
     steps:
 
