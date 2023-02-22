@@ -1,4 +1,4 @@
-# template version 2023.1
+# template version 2023.2
 
 name: Build Python wheel for Alpine Linux
 
@@ -43,14 +43,20 @@ jobs:
       - name: Upload asset to release
         id: upload
         if: github.event_name == 'release'
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+        uses: actions/github-script@v6
         with:
-          asset_content_type: application/octet-stream
-          asset_path: ${{ github.workspace }}/${{ steps.asset.outputs.filename }}
-          asset_name: ${{ steps.asset.outputs.filename }}
-          upload_url: ${{ github.event.release.upload_url }}
+          script: |
+            const fs = require('node:fs/promises');
+            const data = await fs.readFile('${{ github.workspace }}/${{ steps.asset.outputs.filename }}');
+            const repository = '${{ github.repository }}';
+            const { data: releaseAsset } = await github.rest.repos.uploadReleaseAsset({
+              owner: '${{ github.repository_owner }}',
+              repo: repository.split('/')[1],
+              release_id: '${{ github.event.release.id }}',
+              name: '${{ steps.asset.outputs.filename }}',
+              data: data
+            });
+            core.setOutput('browser_download_url', releaseAsset.browser_download_url);
 
       - name: Send repository dispatch to package index
         if: github.event_name == 'release'
