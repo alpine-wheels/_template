@@ -1,4 +1,4 @@
-# template version 2022.4
+# template version 2023.1
 
 name: Build Python wheel for Alpine Linux
 
@@ -33,9 +33,9 @@ jobs:
       - name: Get file name and sha256 of asset
         id: asset
         run: |
-          echo "::set-output name=package_name::$(awk -F '==' '{ print $1 }' requirements.txt)"
-          echo "::set-output name=filename::$(ls *.whl)"
-          echo "::set-output name=sha256::$(shasum -a 256 *.whl | awk '{ print $1 }')"
+          echo "package_name=$(awk -F '==' '{ print $1 }' requirements.txt)" >> $GITHUB_OUTPUT
+          echo "filename=$(ls *.whl)" >> $GITHUB_OUTPUT
+          echo "sha256=$(shasum -a 256 *.whl | awk '{ print $1 }')" >> $GITHUB_OUTPUT
 
       - name: Show sha256 of asset
         run: shasum -a 256 ${{ github.workspace }}/${{ steps.asset.outputs.filename }}
