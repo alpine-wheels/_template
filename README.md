@@ -11,6 +11,8 @@ Use this repository as a starting point for a new package that you want to inclu
    for.
 4. Run `IMAGE_TAG=3.11-alpine docker compose run --rm --no-TTY build` to verify that the package builds correctly.
    Test with any value of `IMAGE_TAG` that you want to build a wheel for.
+5. You can also add additional platforms (e.g. linux/arm64) to `.github/workflows/build-wheel.yaml` if you want to build
+   wheels for platforms other than linux/amd64.
 
 If everything went well, there will be a single `*.whl` file in the repository directory. **Do not** commit this file.
 
