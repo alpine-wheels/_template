@@ -1,4 +1,4 @@
-# template version 2022.4
+# template version 2023.3
 
 services:
   build:
@@ -6,6 +6,7 @@ services:
       - /bin/sh
       - build.sh
     image: python:${IMAGE_TAG}
+    platform: ${PLATFORM:-linux/amd64}
     volumes:
       - ./:/workspace
     working_dir: /workspace
