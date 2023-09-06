@@ -1,4 +1,4 @@
-# template version 2023.3
+# template version 2023.4
 
 name: Build Python wheel for Alpine Linux
 
@@ -25,7 +25,7 @@ jobs:
     steps:
 
       - name: Check out the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
