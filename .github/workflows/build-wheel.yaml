@@ -1,4 +1,4 @@
-# template version 2023.4
+# template version 2023.5
 
 name: Build Python wheel for Alpine Linux
 
@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
 
       - name: Run build script in Alpine container
         run: docker compose run --no-TTY build
