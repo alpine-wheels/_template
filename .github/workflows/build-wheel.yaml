@@ -49,7 +49,7 @@ jobs:
       - name: Upload asset to release
         id: upload
         if: github.event_name == 'release'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const fs = require('node:fs/promises');
