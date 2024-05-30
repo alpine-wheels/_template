@@ -1,4 +1,4 @@
-# template version 2024.1
+# template version 2024.2
 
 name: Build Python wheel for Alpine Linux
 
@@ -15,6 +15,8 @@ jobs:
   build:
     name: Build Python wheel for Alpine Linux
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       matrix:
         image_tag:
